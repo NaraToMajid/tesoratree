@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>OraTree</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 id="username"></h1>
+
+<div id="links"></div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script>
+
+const SUPABASE_URL = "ISI_SUPABASE_URL"
+const SUPABASE_KEY = "ISI_SUPABASE_ANON_KEY"
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+
+const username = window.location.pathname.replace("/", "")
+
+document.getElementById("username").innerText = username
+
+async function loadLinks(){
+
+ const { data, error } = await supabase
+  .from("links")
+  .select("*")
+  .eq("username", username)
+
+ const container = document.getElementById("links")
+
+ if(!data) return
+
+ data.forEach(link => {
+
+  const a = document.createElement("a")
+  a.href = link.url
+  a.target = "_blank"
+
+  const btn = document.createElement("button")
+  btn.innerText = link.title
+
+  a.appendChild(btn)
+
+  container.appendChild(a)
+
+ })
+
+}
+
+loadLinks()
+
+</script>
+
+</body>
+</html>
