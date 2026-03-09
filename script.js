@@ -1,7 +1,7 @@
 const SUPABASE_URL = "https://mqonelsoqyvrasrzrzfl.supabase.co/"
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1xb25lbHNvcXl2cmFzcnpyemZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU5NjEzOTQsImV4cCI6MjA4MTUzNzM5NH0.exHvN0BA3P71DcZbavZ0DMk8pUEpWQ6VCuH672wEdJ4"
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+const supabaseclient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
 
 async function publish(){
 
@@ -14,7 +14,7 @@ async function publish(){
   return
  }
 
- const { data, error } = await supabase
+ const { data, error } = await supabaseclient
   .from("links")
   .insert([
    {
